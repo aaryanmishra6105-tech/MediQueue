@@ -3,7 +3,7 @@ MediQueue - Priority-Based Patient Queue Management System
 Foundation project | Python 3 | Menu-driven console application
 
 Run: python main.py
-Optional CSV export: choose option 8 from the menu.
+Optional CSV export: choose option 9 from the menu.
 No GUI, website, external packages, or database are required.
 """
 
