@@ -354,17 +354,27 @@ def summary_menu(system):
     print("-" * 60)
 
 
+def mark_served_menu(system):
+    token = input("Enter patient token: ").strip()
+
+    if system.mark_served(token):
+        print(f"Patient {token} marked as served.")
+    else:
+        print("Unable to mark served. Check the token and status.")
+
+
 def main():
     system = MediQueue()
     actions = {
-        "1": lambda: register_menu(system),
-        "2": lambda: view_queue_menu(system),
-        "3": lambda: call_next_menu(system),
-        "4": lambda: token_action_menu(system, "skip"),
-        "5": lambda: token_action_menu(system, "recall"),
-        "6": lambda: estimate_menu(system),
-        "7": lambda: summary_menu(system),
-    }
+    "1": lambda: register_menu(system),
+    "2": lambda: view_queue_menu(system),
+    "3": lambda: call_next_menu(system),
+    "4": lambda: token_action_menu(system, "skip"),
+    "5": lambda: token_action_menu(system, "recall"),
+    "6": lambda: estimate_menu(system),
+    "7": lambda: summary_menu(system),
+    "8": lambda: mark_served_menu(system),
+}
 
     while True:
         print_header()
@@ -375,20 +385,22 @@ def main():
         print("5. Recall Patient")
         print("6. Estimate Waiting Time")
         print("7. View Daily Summary")
-        print("8. Save Records to CSV")
-        print("9. Exit")
-        choice = input("\nEnter your choice (1-9): ").strip()
+        print("8. Mark Patient as Served")
+        print("9. Save Records to CSV")
+        print("10. Exit")
+        choice = input("\nEnter your choice (1-10): ").strip()
 
         if choice in actions:
             actions[choice]()
-        elif choice == "8":
+        elif choice == "9":
             path = system.export_csv()
             print(f"\nRecords saved successfully to: {path}")
-        elif choice == "9":
+        elif choice == "10":
             print("\nThank you for using MediQueue. Goodbye!")
             break
         else:
-            print("\nInvalid choice. Please select a number from 1 to 9.")
+            print("\nInvalid choice. Please select a number from 1 to 10.")
+
 
         input("\nPress Enter to return to the main menu...")
 
